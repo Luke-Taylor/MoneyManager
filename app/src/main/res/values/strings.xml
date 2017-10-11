@@ -1,6 +1,29 @@
 <resources>
     <string name="app_name">Money Manager</string>
 
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="add_expense_income">Add&#8230;</string>
+    <string name="total_cashflow">Your monthly cashflow is:</string>
+    <string name="empty_cash">£-</string>
+
+    <string name="title_activity_finance">Add Income/Expense</string>
+
+    <string name="name">Name:</string>
+    <string name="hint_name">Name of income/expense</string>
+
+    <string name="type">Type:</string>
+    <string name="expense">Expense</string>
+    <string name="income">Income</string>
+
+    <string name="pType">Payment type:</string>
+    <string-array name="pTypes">
+        <item>One-off</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
+
+    <string name="amount">Amount:</string>
+    <string name="save">Save</string>
+
+    <string name="title_activity_view_income_expenses">Money</string>
 </resources>
