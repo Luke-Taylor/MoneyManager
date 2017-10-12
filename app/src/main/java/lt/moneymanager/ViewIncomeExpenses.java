@@ -163,6 +163,7 @@ NumberFormat curr;
                     }
                 } else {
                     frequency.setText("-");
+                    total += amount;
                 }
                 frequency.setLayoutParams(params);
 
