@@ -1,5 +1,6 @@
 package lt.moneymanager;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -32,25 +34,16 @@ public class BalanceActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_balance);
 
-        //new File(getFilesDir().getAbsolutePath() + "/financedata.json").delete();
-
-
         JSONObject financeData;
         double cashFlow;
-        TextView txtCash;
         try{
+            //FileManager.deleteData(this);
+
             financeData = FileManager.getFinanceData(this);
 
             cashFlow = calculateCashflow(financeData);
 
-            txtCash = ((TextView)findViewById(R.id.big_cash));
-            txtCash.setText("£" + Double.toString(cashFlow));
-
-            if(cashFlow > 0){
-                txtCash.setTextColor(getResources().getColor(R.color.positive_cashflow));
-            } else {
-                txtCash.setTextColor(getResources().getColor(R.color.negative_cashflow));
-            }
+            startCountAnimation(cashFlow);
 
         } catch (Exception ex){
             Log.d("ERROR",ex.toString());
@@ -76,7 +69,7 @@ public class BalanceActivity extends AppCompatActivity {
             arr = data.getJSONArray("Expenses");
             for(int i =0; i < arr.length(); i++){
                 obj = arr.getJSONObject(i);
-                total -= obj.getDouble("cost");
+                total += obj.getDouble("cost");
             }
 
             //recurring
@@ -90,7 +83,7 @@ public class BalanceActivity extends AppCompatActivity {
             arr = data.getJSONArray("Expenses");
             for(int i =0; i < arr.length(); i++){
                 obj = arr.getJSONObject(i);
-                total -= (obj.getDouble("cost") * obj.getDouble("frequency"));
+                total += (obj.getDouble("cost") * obj.getDouble("frequency"));
             }
             return total;
         } catch (Exception ex){
@@ -109,6 +102,38 @@ public class BalanceActivity extends AppCompatActivity {
         Intent intent = new Intent(BalanceActivity.this, ViewIncomeExpenses.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_up,R.anim.slide_up_down);
+    }
+
+    private void startCountAnimation(double total) throws Exception{
+        final TextView txtCash;
+        float fTotal;
+        ValueAnimator animator;
+
+        try{
+            fTotal = new Float(total);
+            txtCash = ((TextView)findViewById(R.id.big_cash));
+            txtCash.setText("£0.00");
+            animator = ValueAnimator.ofFloat(0,fTotal);
+            animator.setDuration(2000);
+
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    NumberFormat curr = NumberFormat.getCurrencyInstance();
+                    Object cashFlow = animation.getAnimatedValue();
+                    txtCash.setText(curr.format(Double.parseDouble(Float.toString((float)cashFlow))));
+                    if((float)cashFlow > 0){
+                        txtCash.setTextColor(getResources().getColor(R.color.positive_cashflow));
+                    } else {
+                        txtCash.setTextColor(getResources().getColor(R.color.negative_cashflow));
+                    }
+                }
+            });
+            animator.start();
+        } catch(Exception ex){
+            Log.d("Error",ex.toString());
+            throw new Exception("Error animating",ex);
+        }
+
     }
 
 }

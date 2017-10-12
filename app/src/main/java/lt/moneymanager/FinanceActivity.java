@@ -69,13 +69,14 @@ public class FinanceActivity extends AppCompatActivity {
 
             newData = new JSONObject();
             newData.put("cost",Double.parseDouble(((EditText)findViewById(R.id.numAmount)).getText().toString()));
-            newData.put("name",((EditText)findViewById(R.id.txtName)).getText().toString());
+            newData.put("description",((EditText)findViewById(R.id.txtName)).getText().toString());
 
             if(freq.getSelectedItemPosition() == 0){
                 format = new SimpleDateFormat("MM/yyyy");
                 obj = financeData.getJSONObject(format.format(Calendar.getInstance().getTime()));
                 if(((RadioButton)findViewById(R.id.radExpense)).isChecked()){
                     arr = obj.getJSONArray("Expenses");
+                    newData.put("cost",-newData.getDouble("cost"));
                 } else {
                     arr = obj.getJSONArray("Income");
                 }
@@ -99,6 +100,7 @@ public class FinanceActivity extends AppCompatActivity {
                 obj = financeData.getJSONObject("recurring");
                 if(((RadioButton)findViewById(R.id.radExpense)).isChecked()){
                     arr = obj.getJSONArray("Expenses");
+                    newData.put("cost",-newData.getDouble("cost"));
                 } else {
                     arr = obj.getJSONArray("Income");
                 }

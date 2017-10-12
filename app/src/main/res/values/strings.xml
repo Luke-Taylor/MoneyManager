@@ -26,4 +26,8 @@
     <string name="save">Save</string>
 
     <string name="title_activity_view_income_expenses">Money</string>
+    <string name="recurring_in">Recurring Income</string>
+    <string name="recurring_ex">Recurring Expenses</string>
+    <string name="month_in">This Month\'s Income</string>
+    <string name="month_ex">This Month\'s Expenses</string>
 </resources>

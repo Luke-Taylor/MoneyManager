@@ -122,4 +122,14 @@ public class FileManager {
             throw new Exception("Error doing monthly update",ex);
         }
     }
+
+    public static void deleteData(Context context) throws Exception{
+        File f;
+        try{
+            f = new File(context.getFilesDir() + "/financedata.json");
+            f.delete();
+        } catch(Exception ex){
+            throw new Exception("Error deleting data",ex);
+        }
+    }
 }

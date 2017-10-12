@@ -6,16 +6,106 @@
     tools:context="lt.moneymanager.ViewIncomeExpenses">
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5sp">
         <TableLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tableMonthly">
+            android:id="@+id/tableMonthlyIn"
+            android:padding="5sp">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/recurring_in"
+                    android:layout_span="3"
+                    android:layout_width="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"/>
+
+            </TableRow>
 
         </TableLayout>
+
+        <TableLayout
+            android:layout_below="@id/tableMonthlyIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tableMonthlyEx"
+            android:padding="5sp">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/recurring_ex"
+                    android:layout_span="3"
+                    android:layout_width="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+    <TableLayout
+        android:layout_below="@id/tableMonthlyEx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableThisMonthIn"
+        android:padding="5sp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/month_in"
+                android:layout_span="3"
+                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textStyle="bold"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_below="@id/tableThisMonthIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableThisMonthEx"
+        android:padding="5sp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/month_ex"
+                android:layout_span="3"
+                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textStyle="bold"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>
 
     </ScrollView>
 
